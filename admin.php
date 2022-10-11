@@ -13,7 +13,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="argon-dashboard.css?v=2.0.4" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-  <link href="style.css?v7" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body id="body">
