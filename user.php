@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POSTTEST 2 KANIA PUTRI ANANDA</title>
-    <link rel="stylesheet" href="kacans.css">
-    <!-- <script src="kacans.js"></script> -->
+    <title>KANIA PUTRI ANANDA</title>
+    <link rel="stylesheet" href="kacans.css?v1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </head>
 
@@ -18,10 +17,11 @@
     <i class="bi bi-brightness-high-fill" id="toggleDark"></i>
 
     <nav class="navi">
-        <a href="#">Contact</a>
-        <a href="#">About Me</a>
-        <a href="#">Category</a>
-        <a href="user.php">Home</a>
+        <a href="logout.php">Logout</a>
+        <a href="contact_kacans.php">Contact</a>
+        <a href="about_kacans.php">About Me</a>
+        <a href="category.php">Category</a>
+        <a href="kacans.php">Home</a>
     </nav>
 
     <div class="header1"><p> Kacansg Chingu</p></div>

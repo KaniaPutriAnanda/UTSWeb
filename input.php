@@ -1,3 +1,35 @@
+<?php
+    require 'konfigurasi.php';
+    if(isset($_POST['kirim'])){
+        $nama = $_POST['nama'];
+        $kategori = $_POST['kategori'];
+        $tanggal = $_POST['tanggal'];
+        $harga = $_POST['harga'];
+
+        $gambar = $_FILES['gambar']['name'];
+        $x = explode('.',$gambar);
+        $ekstensi = strtolower(end($x));
+        $gambar_baru = "$nama.$ekstensi";
+
+        $tmp = $_FILES['gambar']['tmp_name'];
+        
+        if(move_uploaded_file($tmp, "gambar/".$gambar_baru)){
+            $query = "INSERT INTO barang
+            VALUES ('', '$nama', '$kategori', '$tanggal', '$harga', '$gambar_baru')";
+
+            $result = $db->query($query);
+
+            if($result){
+                header("Location:input.php");
+            }else{
+                echo "gagal kirim";
+            }  
+        }
+        else {
+            echo "GAGAL";
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,40 +42,40 @@
   <link href="nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="nucleo-svg.css" rel="stylesheet" />
+  <link href="nucleo-svg.css?v2" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="argon-dashboard.css?v=2.0.4" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-  <link href="style.css" rel="stylesheet">
+  <link href="style.css?v2" rel="stylesheet">
 </head>
 
 <body id="body">
     <div><h1 class="teks3">Menambahkan Produk</h1></div>
     <div class="kotak4">
-        <form action="">
-            <label for=""">ID Produk: </label> 
-            <input type="text" name="id"> <br>
+      <form action="" method="POST"  enctype="multipart/form-data">
+            <!-- <label for=""">ID Produk: </label> 
+            <input type="text" name="id"> <br> -->
 
             <label for="">Nama Produk: </label>
             <input type="text" name="nama"> <br>
 
             <label for="">Kategori: </label>
-            <select name="" id="">
+            <select name="kategori" id="">
                 <option value="pc">Photo Card</option>
                 <option value="ls">Light Stick</option>
                 <option value="album">Album</option>
             </select> <br>
+            
+            <label for="">TanggaL Rilis: </label>
+            <input type="date" name="tanggal"><br>
+            
+            <label for="">Harga: </label>
+            <input type="number" min="50000" max="1000000000000" name="harga"><br>
 
             <label for="">Gambar Produk: </label>
-            <input type="file" name="foto" accept="image/*"> <br>
+            <input type="file" name="gambar"> <br>
 
-            <label for="">Harga: </label>
-            <input type="number" min="50000" max="1000000000000"><br>
-
-            <label for="">TanggaL Rilis: </label>
-            <input type="date"><br>
-
-            <button type="submit" name="login" id="button1" class="btn btn-primary deep-purple btn-block ">Tambahkan</button>
+            <button type="submit" name="kirim" id="button1" class="btn btn-primary deep-purple btn-block ">Tambahkan</button>
             
         </form>
     </div>
@@ -68,7 +100,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="input.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
             </div>
@@ -77,37 +109,28 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="lihat.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-album-2 text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Lihat Produk</span>
+            <span class="nav-link-text ms-1">Rincian Produk</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="show2.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-bulb-61 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Ubah Produk</span>
+            <span class="nav-link-text ms-1">Pesanan</span>
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link " href="#">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-basket text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Hapus Produk</span>
-          </a>
-        </li>
-        
         <li class="nav-item">
           <a class="nav-link " href="index.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-lock-circle-open text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+            <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
